@@ -13,4 +13,18 @@
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BillVisualizer\BillVisualizer.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="Resources\arve.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Features\PdfReader" />
+  </ItemGroup>
+
 </Project>
