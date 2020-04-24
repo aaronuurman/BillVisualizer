@@ -30,11 +30,22 @@ namespace BillVisualizer.Services
         ///<inheritdoc /> 
         public Task<string> Convert(string filePath)
         {
+            // Todo: Maybe Fluent validation would make sense here.
             if (string.IsNullOrWhiteSpace(filePath))
             {
                 throw new ArgumentNullException(filePath);
             }
             
+            if (!".pdf".Equals(Path.GetExtension(filePath)))
+            {
+                throw new FileFormatException($"File '{filePath}' is not a PDF file.");
+            }
+
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException(filePath);
+            }
+
             Converter.OpenPdf(filePath);
                 
             if (Converter.PageCount < 1)

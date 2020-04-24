@@ -29,11 +29,44 @@ namespace UnitTests.Services
         }
         
         [Fact]
+        public async void Convert_Exception_PdfCorrupted()
+        {
+            // Arrange
+            var service = new PdfToExcelConverter();
+            var filePath = Path.Combine(_tempDataDir, ResourcesFixture.CorruptedPdfPath);
+
+            // Act && Assert
+            await Assert.ThrowsAsync<Exception>(() => service.Convert(filePath));
+        }
+        
+        [Fact]
+        public async void Convert_FileFormatException_NonPdfFile()
+        {
+            // Arrange
+            var service = new PdfToExcelConverter();
+            var filePath = Path.Combine(_tempDataDir, ResourcesFixture.ImagePath);
+
+            // Act && Assert
+            await Assert.ThrowsAsync<FileFormatException>(() => service.Convert(filePath));
+        }
+        
+        [Fact]
+        public async void Convert_FileNotFoundException_FileDoesNotExists()
+        {
+            // Arrange
+            var service = new PdfToExcelConverter();
+            var filePath = Path.Combine(_tempDataDir, ResourcesFixture.ResourcesDir, "nonexistence.pdf");
+
+            // Act && Assert
+            await Assert.ThrowsAsync<FileNotFoundException>(() => service.Convert(filePath));
+        }
+        
+        [Fact]
         public async void Convert_Success_ExcelFileCreated()
         {
             // Arrange
-            var filePath = Path.Combine(_tempDataDir, ResourcesFixture.BillPdfPath);
             var service = new PdfToExcelConverter();
+            var filePath = Path.Combine(_tempDataDir, ResourcesFixture.BillPdfPath);
             var excelFilePath = Path.Combine(_tempDataDir, ResourcesFixture.ResourcesDir, "arve.xls");
             
             // Act
