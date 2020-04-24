@@ -9,12 +9,11 @@ namespace UnitTests.Services
     public class PdfToExcelConverterTests : IDisposable
     {
         private readonly string _tempDataDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-        private string TemporaryBillPdfPath => Path.Combine(_tempDataDir, ResourcesFixture.BillPdfPath);
 
         public PdfToExcelConverterTests()
         {
             Directory.CreateDirectory(_tempDataDir);
-            FileHandler.CopyDirectory(ResourcesFixture.BillPdfPath, TemporaryBillPdfPath);
+            FileHandler.CopyDirectory(ResourcesFixture.ResourcesDir, Path.Combine(_tempDataDir, ResourcesFixture.ResourcesDir));
         }
 
         [Theory]
@@ -30,18 +29,19 @@ namespace UnitTests.Services
         }
         
         [Fact]
-        public void Convert_Success_ExcelFileCreated()
+        public async void Convert_Success_ExcelFileCreated()
         {
             // Arrange
-            var filePath = TemporaryBillPdfPath;
+            var filePath = Path.Combine(_tempDataDir, ResourcesFixture.BillPdfPath);
             var service = new PdfToExcelConverter();
             var excelFilePath = Path.Combine(_tempDataDir, ResourcesFixture.ResourcesDir, "arve.xls");
             
             // Act
-            var result = service.Convert(filePath);
+            var result = await service.Convert(filePath);
 
             // Assert
             result.Should().Be(excelFilePath);
+            File.Exists(excelFilePath).Should().BeTrue();
         }
 
         public void Dispose()
