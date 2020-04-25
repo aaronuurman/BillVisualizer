@@ -9,7 +9,7 @@ namespace UnitTests
         public const string ResourcesDir = "Resources";
 
         /// <summary>Path to pdf bill.</summary>
-        public static string BillPdfPath => Path.Combine(ResourcesDir, "arve.pdf");
+        public static string BillPdfPath => Path.Combine(ResourcesDir, "bill-33666222.pdf");
 
         /// <summary>Path to corrupted pdf bill.</summary>
         public static string CorruptedPdfPath => Path.Combine(ResourcesDir, "corrupted_bill.pdf");

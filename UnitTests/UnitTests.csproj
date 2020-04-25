@@ -19,7 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Resources\arve.pdf">
+    <None Update="Resources\bill-33666222.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\corrupted_bill.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\notpdf.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
