@@ -18,13 +18,11 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Update="Resources\arve.pdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  
-  <ItemGroup>
     <Folder Include="Features\PdfReader" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\Shared\TestResources\**\*" Link="Resources\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
 </Project>
