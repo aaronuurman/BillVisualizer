@@ -1,12 +1,10 @@
 using System;
+using System.IO;
 
 namespace UnitTests.Services
 {
-    public class ExcelToDataSetConverterTests : IDisposable
+    public class ExcelToDataSetConverterTests : ResourcesUnitTest
     {
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
