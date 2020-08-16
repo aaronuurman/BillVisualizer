@@ -11,8 +11,8 @@ namespace UnitTests.Services
         private static string ExcelFilePath;
         
         public ExcelToDataSetConverterTests() {
-            new PdfToExcelConverter().Convert(Path.Combine(TempDataDir, ResourcesFixture.BillPdfPath));
-            ExcelFilePath = Path.Combine(TempDataDir, ResourcesFixture.ResourcesDir, "bill-33666222.xls");
+            new PdfToExcelConverter().Convert(Path.Combine(TempDataDir, ResourcesFixture.InvoicePdfPath));
+            ExcelFilePath = Path.Combine(TempDataDir, ResourcesFixture.InvoiceXlsPath);
         }
 
         [Theory]
@@ -38,8 +38,8 @@ namespace UnitTests.Services
 
             // Assert
             result.Should().NotBeNull();
-            result.Tables[0].Rows.Count.Should().Be(73);
-        }
-        
+            File.Exists(ExcelFilePath).Should().BeTrue();
+            result.Tables[0].Rows.Count.Should().BeGreaterThan(0);
+        }        
     }
 }

@@ -1,0 +1,20 @@
+{
+    "dateFormat": "dd.MM.yyyy",
+    "invoiceNr": "INVOICE nr",
+    "date": "Date",
+    "total": "TOTAL (EUR)",
+    "dataRows": [
+        "Electricity (with daily tariff)",
+        "Electricity (with night tariff)",
+        "General electricity",
+        "Ampere and monthly fee",
+        "Water",
+        "Water heating",
+        "General water",
+        "Thermal energy",
+        "Garbage collection",
+        "Administrative and maintenance service",
+        "Maintenance fund",
+        "Board fees"
+    ]
+}

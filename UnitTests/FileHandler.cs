@@ -1,4 +1,6 @@
 using System.IO;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace UnitTests
 {
@@ -21,7 +23,7 @@ namespace UnitTests
             {
                 Directory.Delete(destDir, true);
             }
-            
+
             Directory.CreateDirectory(destDir);
 
             var dirs = sourceDirectory.GetDirectories();
@@ -31,12 +33,44 @@ namespace UnitTests
                 var tmpPath = Path.Combine(destDir, file.Name);
                 file.CopyTo(tmpPath, false);
             }
-            
+
             foreach (var subDir in dirs)
             {
                 var tmpPath = Path.Combine(destDir, subDir.Name);
                 CopyDirectory(subDir.FullName, tmpPath);
             }
+        }
+
+        /// <summary>
+        /// Deserialize json to provided entity.
+        /// </summary>
+        /// <typeparam name="TEntity">Entity the json to be deserialized.</typeparam>
+        public static async Task<TEntity> DeSerializeJsonAsync<TEntity>(string filePath)
+            where TEntity : class
+        {
+            using var fs = File.OpenRead(filePath);
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+
+            return await JsonSerializer.DeserializeAsync<TEntity>(fs, options);
+        }
+
+        /// <summary> Make a json snapshot of provided object. </summary>
+        public static async Task CreateJsonSnapshotAsync<TEnity>(TEnity data, string filePath)
+            where TEnity : class
+        {
+            var options = new JsonSerializerOptions
+            {
+                IgnoreNullValues = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                
+            };
+
+            string json = JsonSerializer.Serialize(data, options);
+            await File.WriteAllTextAsync(filePath, json);
         }
     }
 }

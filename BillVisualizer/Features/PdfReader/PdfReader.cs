@@ -1,3 +1,5 @@
+using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using BillVisualizer.Infrastructure.Command;
 using BillVisualizer.Services;
@@ -39,9 +41,12 @@ namespace BillVisualize.Features.PdfReader
       /// <inheritdoc />
       public async Task Handle(Command command)
       {
+        using var fs = File.OpenRead("invoiceproperties.json");
+        var invoiceProperties = await JsonSerializer.DeserializeAsync<InvoiceProperties>(fs);
+
         var excelPath = await _pdfToExcelConverter.Convert(command.FilePath);
         var dataSet = await _excelToDataSetConverter.Convert(excelPath);
-        var data = await _parser.Parse(dataSet);
+        var data = await _parser.ParseAsync(dataSet, invoiceProperties);
       }
     }
   }
