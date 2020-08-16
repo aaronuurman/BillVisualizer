@@ -59,7 +59,7 @@ namespace UnitTests.Services
             // Arrange
             var service = new PdfToExcelConverter();
             var filePath = Path.Combine(TempDataDir, ResourcesFixture.InvoicePdfPath);
-            var excelFilePath = Path.Combine(TempDataDir, ResourcesFixture.ResourcesDir, "bill-33666222.xls");
+            var excelFilePath = Path.Combine(TempDataDir, ResourcesFixture.InvoiceXlsPath);
             
             // Act
             var result = await service.Convert(filePath);
