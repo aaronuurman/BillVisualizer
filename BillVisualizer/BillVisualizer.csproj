@@ -7,7 +7,7 @@
   <ItemGroup>
     <PackageReference Include="ExcelDataReader" Version="3.6.0" />
     <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
-    <PackageReference Include="sautinsoft.pdffocus" Version="8.2.1.18" />
+    <PackageReference Include="sautinsoft.pdffocus" Version="8.3.3.25" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
   </ItemGroup>
 
